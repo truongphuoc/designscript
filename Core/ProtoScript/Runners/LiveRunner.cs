@@ -879,6 +879,7 @@ namespace ProtoScript.Runners
             //Validity.Assert(coreOptions.IsDeltaExecution && !coreOptions.GenerateExprID);
 
             runnerCore = new ProtoCore.Core(coreOptions);
+            compileState = ProtoScript.CompilerUtils.BuildDefaultCompilerState();
             
             SyncCoreConfigurations(runnerCore, executionOptions);
 
@@ -1206,7 +1207,7 @@ namespace ProtoScript.Runners
             ProtoCore.Runtime.Context runtimeContext = new ProtoCore.Runtime.Context();
             runtimeContext.execFlagList = graphCompiler.ExecutionFlagList;
 
-            runner.Execute(runnerCore, runtimeContext, null);
+            runner.Execute(runnerCore, runtimeContext, compileState);
 
             return new ProtoRunner.ProtoVMState(runnerCore);
         }
