@@ -1280,7 +1280,7 @@ namespace ProtoScript.Runners
 
             runner.Execute(runnerCore, runtimeContext, compileState);
 
-            return new ProtoRunner.ProtoVMState(runnerCore);
+            return new ProtoRunner.ProtoVMState(runnerCore, compileState);
         }
 
         private bool CompileAndExecute(string code)
