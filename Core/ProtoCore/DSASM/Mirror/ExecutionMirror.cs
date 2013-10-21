@@ -278,6 +278,30 @@ namespace ProtoCore.DSASM.Mirror
             }
         }
 
+<<<<<<< HEAD
+=======
+        private string GetPointerTrace(int ptr, Heap heap, int langblock, HashSet<int> pointers, bool forPrint)
+        {
+            if (pointers.Contains(ptr))
+            {
+                return "{ ... }";
+            }
+            else
+            {
+                pointers.Add(ptr);
+
+                if (forPrint)
+                {
+                    return "{" + GetArrayTrace(ptr, heap, langblock, pointers, forPrint) + "}";
+                }
+                else
+                {
+                    return "{ " + GetArrayTrace(ptr, heap, langblock, pointers, forPrint) + " }";
+                }
+            }
+        }
+
+>>>>>>> upstream/StableBranchWithTestcases
         private string GetArrayTrace(int pointer, Heap heap, int langblock, HashSet<int> pointers, bool forPrint)
         {
             if (!formatParams.ContinueOutputTrace())
@@ -294,6 +318,11 @@ namespace ProtoCore.DSASM.Mirror
                     halfArraySize = (int)Math.Floor(formatParams.MaxArraySize * 0.5);
             }
 
+<<<<<<< HEAD
+=======
+            int totalElementCount = hs.VisibleSize + (hs.Dict == null ? 0 : hs.Dict.Count());
+
+>>>>>>> upstream/StableBranchWithTestcases
             for (int n = 0; n < hs.VisibleSize; ++n)
             {
                 // As we try to output the next element in the array, there 
@@ -307,6 +336,7 @@ namespace ProtoCore.DSASM.Mirror
                 StackValue sv = hs.Stack[n];
                 if (sv.optype == AddressType.ArrayPointer)
                 {
+<<<<<<< HEAD
                     int ptr = (int)sv.opdata;
                     if (pointers.Contains(ptr))
                         arrayElements.Append("{ ... }");
@@ -318,6 +348,9 @@ namespace ProtoCore.DSASM.Mirror
                         else
                             arrayElements.Append("{ " + GetArrayTrace(ptr, heap, langblock, pointers, forPrint) + " }");
                     }
+=======
+                    arrayElements.Append(GetPointerTrace((int)sv.opdata, heap, langblock, pointers, forPrint));
+>>>>>>> upstream/StableBranchWithTestcases
                 }
                 else
                 {
@@ -330,7 +363,61 @@ namespace ProtoCore.DSASM.Mirror
                 if (halfArraySize > 0 && (n == halfArraySize - 1))
                 {
                     arrayElements.Append(", ...");
+<<<<<<< HEAD
                     n = hs.VisibleSize - halfArraySize - 1;
+=======
+                    n = totalElementCount - halfArraySize - 1;
+                }
+            }
+
+            if (hs.Dict != null)
+            {
+                int startIndex = (halfArraySize > 0) ? hs.Dict.Count - halfArraySize : 0;
+                int index = -1;
+
+                foreach (var keyValuePair in hs.Dict)
+                {
+                    index++;
+                    if (index < startIndex)
+                    {
+                        continue;
+                    }
+
+                    if (arrayElements.Length > 0)
+                    {
+                        if (forPrint)
+                        {
+                            arrayElements.Append(",");
+                        }
+                        else
+                        {
+                            arrayElements.Append(", ");
+                        }
+                    }
+
+                    StackValue key = keyValuePair.Key;
+                    StackValue value = keyValuePair.Value;
+
+                    if (key.optype == AddressType.ArrayPointer)
+                    {
+                        arrayElements.Append(GetPointerTrace((int)key.opdata, heap, langblock, pointers, forPrint));
+                    }
+                    else
+                    {
+                        arrayElements.Append(GetStringValue(key, heap, langblock, forPrint));
+                    }
+
+                    arrayElements.Append("=");
+
+                    if (value.optype == AddressType.ArrayPointer)
+                    {
+                        arrayElements.Append(GetPointerTrace((int)value.opdata, heap, langblock, pointers, forPrint));
+                    }
+                    else
+                    {
+                        arrayElements.Append(GetStringValue(value, heap, langblock, forPrint));
+                    }
+>>>>>>> upstream/StableBranchWithTestcases
                 }
             }
 

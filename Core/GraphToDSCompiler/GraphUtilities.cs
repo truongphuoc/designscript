@@ -692,7 +692,11 @@ namespace GraphToDSCompiler
         /// <param name="errors"></param>
         public static void CompileExpression(string expression, out List<string> compiled)
         {
+<<<<<<< HEAD
             expression = expression.Replace("\r\n", "\n");
+=======
+            //expression = expression.Replace("\r\n", "\n");
+>>>>>>> upstream/StableBranchWithTestcases
             int oldIndex = 0;
             compiled = new List<string>();
 
@@ -1016,10 +1020,15 @@ namespace GraphToDSCompiler
         /// <param name="astNodes"></param>
         /// <returns>Returns true if compilation succeeded, or false otherwise. Returning true may still 
         /// result in warnings, which suggests that the compilation was successful with warning.</returns>             
+<<<<<<< HEAD
         public static bool ParseCodeBlockNodeStatements(string compilableText,
             out Dictionary<int, List<VariableLine>> unboundIdentifiers, out List<ProtoCore.AST.Node> astNodes, out ProtoCore.BuildStatus buildStatus)
         {
             unboundIdentifiers = new Dictionary<int, List<VariableLine>>();
+=======
+        public static bool ParseCodeBlockNodeStatements(string compilableText, Dictionary<int, List<VariableLine>> unboundIdentifiers, out List<ProtoCore.AST.Node> astNodes)
+        {
+>>>>>>> upstream/StableBranchWithTestcases
             List<ProtoCore.BuildData.WarningEntry> warnings = null;
 
             if (string.IsNullOrEmpty(compilableText))
@@ -1031,16 +1040,26 @@ namespace GraphToDSCompiler
             {
                 BuildCore(true);
                 int blockId = ProtoCore.DSASM.Constants.kInvalidIndex;
+<<<<<<< HEAD
                 //ProtoCore.BuildStatus status = PreCompile(compilableText, core, out blockId);
                 buildStatus = PreCompile(compilableText, core, out blockId);
 
                 if (buildStatus.Errors.Count > 0)
+=======
+                ProtoCore.BuildStatus status = PreCompile(compilableText, core, out blockId);
+
+                if (status.Errors.Count > 0)
+>>>>>>> upstream/StableBranchWithTestcases
                 {
                     astNodes = null;
                     return false;
                 }
 
+<<<<<<< HEAD
                 warnings = buildStatus.Warnings;
+=======
+                warnings = status.Warnings;
+>>>>>>> upstream/StableBranchWithTestcases
 
                 if (null != unboundIdentifiers)
                     GetInputLines(compilableText, warnings, unboundIdentifiers);
@@ -1051,6 +1070,7 @@ namespace GraphToDSCompiler
             catch (Exception exception)
             {
                 astNodes = null;
+<<<<<<< HEAD
                 buildStatus = null;
                 return false;
             }
@@ -1105,6 +1125,8 @@ namespace GraphToDSCompiler
                 errors = null;
                 warnings = null;
                 unboundIdentifiers = null;
+=======
+>>>>>>> upstream/StableBranchWithTestcases
                 return false;
             }
         }

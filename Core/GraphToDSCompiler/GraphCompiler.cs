@@ -7,7 +7,10 @@ using System.Text;
 using System.IO;
 using System.Collections;
 using ProtoCore.Utils;
+<<<<<<< HEAD
 using System.Diagnostics;
+=======
+>>>>>>> upstream/StableBranchWithTestcases
 
 namespace GraphToDSCompiler
 {
@@ -1292,6 +1295,7 @@ namespace GraphToDSCompiler
             */
             UpdateAddedNodesInModifiedNameList();
 
+<<<<<<< HEAD
             for (int i=0; i<result.Count; i++)
             {
                 Debug.WriteLine("Node " + i+":");
@@ -1311,6 +1315,8 @@ namespace GraphToDSCompiler
                 }
             }
 
+=======
+>>>>>>> upstream/StableBranchWithTestcases
             return result;
         }
 

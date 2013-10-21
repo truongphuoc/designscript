@@ -187,6 +187,7 @@ namespace ProtoCore.Utils
                 {
                     if (charPos == prevLineLen + endCol)
                     {
+<<<<<<< HEAD
                         if (charPos != code.Length + 1)
                             endIndex = charPos + 1;
                         else
@@ -196,6 +197,9 @@ namespace ProtoCore.Utils
                             charPos++;
                             endIndex++;
                         }
+=======
+                        endIndex = charPos;
+>>>>>>> upstream/StableBranchWithTestcases
                         break;
                     }
 
